@@ -28,7 +28,7 @@ A comprehensive, production-ready URL Shortener web application built with Sprin
 ## Prerequisites
 
 - Java 17 or higher
-- Maven 3.9+ 
+- Maven 3.9+
 - Docker and Docker Compose (optional, for containerized deployment)
 - PostgreSQL (optional, for production database)
 
@@ -58,6 +58,7 @@ The application will start on `http://localhost:8080`
 ### 4. Using H2 Console (Development)
 
 Access the H2 console at `http://localhost:8080/h2-console` with:
+
 - JDBC URL: `jdbc:h2:mem:urlshortener`
 - Username: `sa`
 - Password: (leave empty)
@@ -67,6 +68,7 @@ Access the H2 console at `http://localhost:8080/h2-console` with:
 ### Authentication
 
 #### Register User
+
 ```http
 POST /api/auth/register
 Content-Type: application/json
@@ -78,6 +80,7 @@ Content-Type: application/json
 ```
 
 #### Login
+
 ```http
 POST /api/auth/login
 Content-Type: application/json
@@ -89,6 +92,7 @@ Content-Type: application/json
 ```
 
 Response:
+
 ```json
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -100,6 +104,7 @@ Response:
 ### URL Shortening
 
 #### Shorten URL
+
 ```http
 POST /api/shorten
 Content-Type: application/json
@@ -110,6 +115,7 @@ Content-Type: application/json
 ```
 
 Response:
+
 ```json
 {
   "shortUrl": "http://localhost:8080/ABCD1234",
@@ -119,6 +125,7 @@ Response:
 ```
 
 #### Redirect to Original URL
+
 ```http
 GET /{shortCode}
 ```
@@ -126,12 +133,14 @@ GET /{shortCode}
 Example: `GET /ABCD1234` redirects to the original URL.
 
 #### Get Statistics
+
 ```http
 GET /api/stats/{shortCode}
 Authorization: Bearer {token}
 ```
 
 Response:
+
 ```json
 {
   "shortCode": "ABCD1234",
@@ -166,11 +175,13 @@ mvn jacoco:report
 ```
 
 View HTML report:
+
 ```bash
 open target/site/jacoco/index.html
 ```
 
 Check coverage threshold:
+
 ```bash
 mvn jacoco:check
 ```
@@ -184,6 +195,7 @@ mvn org.pitest:pitest-maven:mutationCoverage
 ```
 
 View HTML report:
+
 ```bash
 open target/pit-reports/index.html
 ```
@@ -215,6 +227,7 @@ The project uses JML (Java Modeling Language) annotations for formal verificatio
 ### Verify JML Contracts
 
 1. Install OpenJML:
+
    ```bash
    wget https://github.com/OpenJML/OpenJML/releases/download/0.9.0/openjml-0.9.0.zip
    unzip openjml-0.9.0.zip
@@ -222,6 +235,7 @@ The project uses JML (Java Modeling Language) annotations for formal verificatio
    ```
 
 2. Compile with OpenJML:
+
    ```bash
    mvn clean compile
    ```
@@ -252,17 +266,20 @@ docker-compose up -d
 ```
 
 This starts:
+
 - URL Shortener application on port 8080
 - PostgreSQL database on port 5432
 
 ### Push to DockerHub
 
 1. Login to DockerHub:
+
    ```bash
    docker login
    ```
 
 2. Tag the image:
+
    ```bash
    docker tag url-shortener:latest <your-username>/url-shortener:latest
    ```
@@ -287,7 +304,7 @@ spring:
 
 jwt:
   secret: your-256-bit-secret-key-minimum-32-characters
-  expiration: 86400000  # 24 hours
+  expiration: 86400000 # 24 hours
 ```
 
 ### Environment Variables
@@ -304,7 +321,7 @@ The project includes a comprehensive GitHub Actions workflow (`.github/workflows
 2. **Code Coverage**: Generates JaCoCo reports and checks thresholds
 3. **Mutation Testing**: Runs PiTest mutation analysis
 4. **JML Verification**: Verifies JML contracts (placeholder)
-5. **Security Scanning**: 
+5. **Security Scanning**:
    - GitGuardian for secret scanning
    - Snyk for dependency vulnerabilities
    - SonarCloud for code quality
@@ -395,3 +412,4 @@ For issues and questions, please open an issue on GitHub.
 - PiTest developers
 - JMH team
 
+# software-dependability-accessment
